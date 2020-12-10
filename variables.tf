@@ -43,7 +43,7 @@ variable "lb_ports" {
     }, {
     name        = "https"
     port        = 443
-    target_port = "https"
+    target_port = 80
   }]
 }
 
