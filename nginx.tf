@@ -259,10 +259,9 @@ resource "kubernetes_deployment" "nginx" {
             "--tcp-services-configmap=$(POD_NAMESPACE)/${kubernetes_config_map.nginx_tcp.metadata.0.name}",
             "--udp-services-configmap=$(POD_NAMESPACE)/${kubernetes_config_map.nginx_udp.metadata.0.name}",
             "--publish-service=$(POD_NAMESPACE)/${var.name}",
-            "--annotations-prefix=nginx.ingress.kubernetes.io",
             "--enable-ssl-chain-completion=true",
             "--election-id=${var.name}-leader",
-            "--ingress-class=${var.name}",
+            "--ingress-class=nginx",
           ]
 
           volume_mount {

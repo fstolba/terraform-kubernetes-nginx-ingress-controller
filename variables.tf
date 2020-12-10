@@ -7,7 +7,7 @@ variable "name" {
 variable "nginx_ingress_controller_version" {
   description = "The version of Nginx Ingress Controller to use. See https://github.com/kubernetes/ingress-nginx/releases for available versions"
   type        = string
-  default     = "0.29.0"
+  default     = "0.32.0"
 }
 
 variable "nginx_config" {
@@ -63,4 +63,9 @@ variable "disruption_budget_max_unavailable" {
   description = "The maximum unavailability of the nginx deployment"
   type = string
   default = "50%"
+}
+
+variable "elastic_ip_id" {
+  description = "Elastic IP address ID to use"
+  default = null
 }
