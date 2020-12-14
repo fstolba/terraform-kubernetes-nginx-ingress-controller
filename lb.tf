@@ -23,12 +23,13 @@ resource "kubernetes_service" "lb" {
     external_traffic_policy = "Local"
 
     dynamic "port" {
-      for_each = var.lb_ports
+      for_each = local.lb_ports
 
       content {
         name        = port.value.name
         port        = port.value.port
         target_port = port.value.target_port
+        protocol    = port.value.protocol
       }
     }
     load_balancer_source_ranges = var.load_balancer_source_ranges

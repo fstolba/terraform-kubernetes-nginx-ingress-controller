@@ -35,15 +35,18 @@ variable "lb_ports" {
     name        = string
     port        = number
     target_port = string
+    protocol    = string
   }))
   default = [{
     name        = "http"
     port        = 80
     target_port = "http"
+    protocol    = "TCP"
     }, {
     name        = "https"
     port        = 443
     target_port = 80
+    protocol    = "TCP"
   }]
 }
 
@@ -68,4 +71,13 @@ variable "disruption_budget_max_unavailable" {
 variable "elastic_ip_id" {
   description = "Elastic IP address ID to use"
   default = null
+}
+
+variable "tcp_services" {
+  description = "List of extra TCP services"
+  default = {}
+}
+variable "udp_services" {
+  description = "List of extra UDP services"
+  default = {}
 }

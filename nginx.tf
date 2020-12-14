@@ -37,6 +37,8 @@ resource "kubernetes_config_map" "nginx_tcp" {
       "app.kubernetes.io/managed-by" = "terraform"
     }
   }
+  data = local.tcp_services_map
+
 }
 
 resource "kubernetes_config_map" "nginx_udp" {
@@ -50,6 +52,8 @@ resource "kubernetes_config_map" "nginx_udp" {
       "app.kubernetes.io/managed-by" = "terraform"
     }
   }
+
+ data = local.udp_services_map
 }
 
 resource "kubernetes_service_account" "nginx" {
