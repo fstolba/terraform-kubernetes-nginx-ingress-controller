@@ -9,6 +9,7 @@ In AWS, this will trigger kubernetes ingress to  create target groups required t
 ```
 module nginx-ingress-controller {
   source  = "github.com/sanarena/terraform-kubernetes-nginx-ingress-controller"
+  # however recommended way is to add this repository as a submodule
 
   # optional
   nginx_ingress_controller_version = "0.33.0"
