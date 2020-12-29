@@ -145,7 +145,7 @@ resource "kubernetes_role" "nginx" {
   rule {
     api_groups = [""]
     resources  = ["configmaps"]
-    verbs      = ["create"]
+    verbs      = ["create", "update"]
   }
 
   rule {
@@ -264,7 +264,7 @@ resource "kubernetes_deployment" "nginx" {
             "--udp-services-configmap=$(POD_NAMESPACE)/${kubernetes_config_map.nginx_udp.metadata.0.name}",
             "--publish-service=$(POD_NAMESPACE)/${var.name}",
             "--enable-ssl-chain-completion=true",
-            "--enable-ssl-passthrough",
+            # "--enable-ssl-passthrough",
             "--election-id=${var.name}-leader",
             "--ingress-class=nginx",
           ]
