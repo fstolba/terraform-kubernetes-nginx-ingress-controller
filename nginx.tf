@@ -240,6 +240,7 @@ resource "kubernetes_deployment" "nginx" {
           "prometheus.io/scrape" = "true"
           // TODO make these configurable
           "nginx.ingress.kubernetes.io/server-snippet" = "grpc_read_timeout 3600s;"
+          "cluster-autoscaler.kubernetes.io/safe-to-evict" = "false"
         }
       }
 
@@ -250,7 +251,8 @@ resource "kubernetes_deployment" "nginx" {
         priority_class_name              = var.priority_class_name
 
         node_selector = {
-          "kubernetes.io/os" = "linux"
+          "kubernetes.io/os" = "linux",
+          "node.kubernetes.io/lifecycle"="on-demand"
         }
 
         container {
