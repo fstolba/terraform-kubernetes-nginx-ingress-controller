@@ -53,7 +53,7 @@ variable "lb_ports" {
 variable "priority_class_name" {
   description = "The priority class to attach to the deployment"
   type        = string
-  default     = null
+  default     = "system-cluster-critical"
 }
 
 variable "controller_replicas" {
