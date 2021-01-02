@@ -240,7 +240,6 @@ resource "kubernetes_deployment" "nginx" {
           "prometheus.io/scrape" = "true"
           // TODO make these configurable
           "nginx.ingress.kubernetes.io/server-snippet" = "grpc_read_timeout 3600s;"
-          "cluster-autoscaler.kubernetes.io/safe-to-evict" = "false"
         }
       }
 
@@ -252,8 +251,56 @@ resource "kubernetes_deployment" "nginx" {
 
         node_selector = {
           "kubernetes.io/os" = "linux",
-          "node.kubernetes.io/lifecycle"="on-demand"
+          # "node.kubernetes.io/lifecycle"="on-demand"
         }
+
+        affinity {
+          pod_anti_affinity {
+            required_during_scheduling_ignored_during_execution {
+              topology_key = "kubernetes.io/hostname"
+              label_selector {
+                match_expressions {
+                key      = "app.kubernetes.io/name"
+                operator = "In"
+                values   = ["ingress-nginx"]
+                }
+              }
+            }
+          }
+          node_affinity {
+            preferred_during_scheduling_ignored_during_execution {
+              weight = 1
+              preference {
+                match_expressions {
+                key      = "restart"
+                operator = "In"
+                values   = ["unlikely"]
+                }
+              }
+            }
+          }
+        }
+        # topologySpreadConstraints do same, but not implemented in terraform v0.14.3 yet.
+        # topologySpreadConstraints:
+        #   - labelSelector:
+        #       matchLabels:
+        #         app.kubernetes.io/name: ingress-nginx
+        #     maxSkew: 1
+        #     topologyKey: kubernetes.io/hostname
+
+
+        # toleration {
+        #   effect = "NoSchedule"
+        #   key = "onlyfor"
+        #   operator = "Equal"
+        #   value = "highcpu"
+        # }
+        # toleration {
+        #   effect = "NoSchedule"
+        #   key = "dbonly"
+        #   operator = "Equal"
+        #   value = "yes"
+        # }
 
         container {
           name  = "nginx-ingress-controller"
