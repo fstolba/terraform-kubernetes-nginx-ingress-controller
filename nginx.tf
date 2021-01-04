@@ -244,8 +244,8 @@ resource "kubernetes_deployment" "nginx" {
       }
 
       spec {
-        // wait up to 5 minutes to drain connections
-        termination_grace_period_seconds = 300
+        // wait up to 2 minutes to drain connections
+        termination_grace_period_seconds = 100
         service_account_name             = kubernetes_service_account.nginx.metadata.0.name
         priority_class_name              = var.priority_class_name
 
@@ -289,18 +289,18 @@ resource "kubernetes_deployment" "nginx" {
         #     topologyKey: kubernetes.io/hostname
 
 
-        # toleration {
-        #   effect = "NoSchedule"
-        #   key = "onlyfor"
-        #   operator = "Equal"
-        #   value = "highcpu"
-        # }
-        # toleration {
-        #   effect = "NoSchedule"
-        #   key = "dbonly"
-        #   operator = "Equal"
-        #   value = "yes"
-        # }
+        toleration {
+          effect = "NoSchedule"
+          key = "onlyfor"
+          operator = "Equal"
+          value = "highcpu"
+        }
+        toleration {
+          effect = "NoSchedule"
+          key = "dbonly"
+          operator = "Equal"
+          value = "yes"
+        }
 
         container {
           name  = "nginx-ingress-controller"
