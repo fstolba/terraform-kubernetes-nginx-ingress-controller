@@ -262,7 +262,7 @@ resource "kubernetes_deployment" "nginx" {
                 match_expressions {
                 key      = "app.kubernetes.io/name"
                 operator = "In"
-                values   = ["ingress-nginx"]
+                values   = [var.name]
                 }
               }
             }
@@ -315,7 +315,7 @@ resource "kubernetes_deployment" "nginx" {
             "--enable-ssl-chain-completion=true",
             # "--enable-ssl-passthrough",
             "--election-id=${var.name}-leader",
-            "--ingress-class=nginx",
+            "--ingress-class=${var.class_name}",
           ]
 
           volume_mount {
