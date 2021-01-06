@@ -74,11 +74,6 @@ variable "disruption_budget_max_unavailable" {
   default = "50%"
 }
 
-variable "elastic_ip_id" {
-  description = "Elastic IP address ID to use"
-  default = null
-}
-
 variable "tcp_services" {
   description = "List of extra TCP services"
   default = {}
