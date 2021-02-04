@@ -53,7 +53,7 @@ resource "kubernetes_config_map" "nginx_udp" {
     }
   }
 
- data = local.udp_services_map
+  data = local.udp_services_map
 }
 
 resource "kubernetes_service_account" "nginx" {
@@ -260,9 +260,9 @@ resource "kubernetes_deployment" "nginx" {
               topology_key = "kubernetes.io/hostname"
               label_selector {
                 match_expressions {
-                key      = "app.kubernetes.io/name"
-                operator = "In"
-                values   = [var.name]
+                  key      = "app.kubernetes.io/name"
+                  operator = "In"
+                  values   = [var.name]
                 }
               }
             }
@@ -272,9 +272,9 @@ resource "kubernetes_deployment" "nginx" {
               weight = 1
               preference {
                 match_expressions {
-                key      = "restart"
-                operator = "In"
-                values   = ["unlikely"]
+                  key      = "restart"
+                  operator = "In"
+                  values   = ["unlikely"]
                 }
               }
             }
@@ -290,16 +290,16 @@ resource "kubernetes_deployment" "nginx" {
 
 
         toleration {
-          effect = "NoSchedule"
-          key = "onlyfor"
+          effect   = "NoSchedule"
+          key      = "onlyfor"
           operator = "Equal"
-          value = "highcpu"
+          value    = "highcpu"
         }
         toleration {
-          effect = "NoSchedule"
-          key = "dbonly"
+          effect   = "NoSchedule"
+          key      = "dbonly"
           operator = "Equal"
-          value = "yes"
+          value    = "yes"
         }
 
         container {

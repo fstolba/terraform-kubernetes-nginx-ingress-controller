@@ -70,15 +70,15 @@ variable "controller_replicas" {
 
 variable "disruption_budget_max_unavailable" {
   description = "The maximum unavailability of the nginx deployment"
-  type = string
-  default = "50%"
+  type        = string
+  default     = "50%"
 }
 
 variable "tcp_services" {
   description = "List of extra TCP services"
-  default = {}
+  default     = {}
 }
 variable "udp_services" {
   description = "List of extra UDP services"
-  default = {}
+  default     = {}
 }
