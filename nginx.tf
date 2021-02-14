@@ -318,11 +318,11 @@ resource "kubernetes_deployment" "nginx" {
             "--ingress-class=${var.class_name}",
           ]
 
-          volume_mount {
-            mount_path = "/var/run/secrets/kubernetes.io/serviceaccount"
-            name       = kubernetes_service_account.nginx.default_secret_name
-            read_only  = true
-          }
+          # volume_mount {
+          #   mount_path = "/var/run/secrets/kubernetes.io/serviceaccount"
+          #   name       = kubernetes_service_account.nginx.default_secret_name
+          #   read_only  = true
+          # }
 
           security_context {
             allow_privilege_escalation = true
@@ -399,13 +399,13 @@ resource "kubernetes_deployment" "nginx" {
           }
         }
 
-        volume {
-          name = kubernetes_service_account.nginx.default_secret_name
+        # volume {
+        #   name = kubernetes_service_account.nginx.default_secret_name
 
-          secret {
-            secret_name = kubernetes_service_account.nginx.default_secret_name
-          }
-        }
+        #   secret {
+        #     secret_name = kubernetes_service_account.nginx.default_secret_name
+        #   }
+        # }
       }
     }
   }
