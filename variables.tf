@@ -82,3 +82,8 @@ variable "udp_services" {
   description = "List of extra UDP services"
   default     = {}
 }
+
+variable "tls_secret_name" {
+  description = "Default TLS Secret namespace/name"
+  default     = ""
+}

@@ -316,6 +316,7 @@ resource "kubernetes_deployment" "nginx" {
             # "--enable-ssl-passthrough",
             "--election-id=${var.name}-leader",
             "--ingress-class=${var.class_name}",
+            "--default-ssl-certificate=${var.tls_secret_name}",
           ]
 
           # volume_mount {
