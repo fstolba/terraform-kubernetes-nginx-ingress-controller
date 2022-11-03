@@ -304,7 +304,8 @@ resource "kubernetes_deployment" "nginx" {
 
         container {
           name  = "nginx-ingress-controller"
-          image = "quay.io/kubernetes-ingress-controller/nginx-ingress-controller:${var.nginx_ingress_controller_version}"
+          image = "registry.k8s.io/ingress-nginx/controller:${var.nginx_ingress_controller_version}"
+          #image = "quay.io/kubernetes-ingress-controller/nginx-ingress-controller:${var.nginx_ingress_controller_version}"
 
           args = [
             "/nginx-ingress-controller",
