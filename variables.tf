@@ -4,6 +4,12 @@ variable "name" {
   default     = "ingress-nginx"
 }
 
+variable "namespace" {
+  description = "The namespace to run in"
+  type        = string
+  default     = "kube-system"
+}
+
 variable "class_name" {
   description = "The name of this nginx ingress class"
   type        = string
