@@ -1,7 +1,7 @@
 // https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.29.0/deploy/static/mandatory.yaml
 resource "kubernetes_namespace" "nginx" {
   metadata {
-    name = var.name
+    name = var.namespace
 
     labels = {
       "app.kubernetes.io/name"       = var.name
